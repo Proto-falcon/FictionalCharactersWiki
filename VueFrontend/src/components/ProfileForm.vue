@@ -141,5 +141,3 @@ export default {
 	<h1 v-if="this.accepted && type == 'edit'">Character Updated</h1>
 	<h1 v-else-if="this.accepted">Character Submited</h1>
 </template>
-
-<style scoped></style>
