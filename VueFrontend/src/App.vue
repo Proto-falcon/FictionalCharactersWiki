@@ -31,10 +31,7 @@ export default {
 			let response = await fetch("http://localhost:8000/getprofiles");
 			let profiles = await response.json();
 
-            if (this.characters.length <= 0)
-            {
-                this.characters = this.characters.concat(profiles["profiles"]);   
-            }
+            this.characters = profiles["profiles"];
 		},
         async deleteprofile(event)
         {
@@ -94,7 +91,7 @@ export default {
     <section v-else v-for="char in characters" class="container-md float">
         <template v-for="(prop, key) in char">
             <div v-if="key !== 'id'" class="row my-1">
-                <p class="col border rounded border-3 border-primary ms-2 text-center">
+                <p class="col border rounded border-3 border-primary ms-2 text-center fs-3">
                     {{ key }}: {{ prop }}
                 </p>
             </div>

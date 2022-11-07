@@ -3,6 +3,7 @@ from django.db import models
 
 # Create your models here.
 class CharacterProfile(models.Model):
+    """Represents a fictional character in the database"""
     name = models.CharField(max_length=254)
     date_of_birth = models.DateField("Date of Birth:")
     age = models.IntegerField()

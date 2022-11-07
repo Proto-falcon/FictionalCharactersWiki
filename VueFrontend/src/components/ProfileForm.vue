@@ -1,9 +1,6 @@
 <script>
 export default {
-	props: [
-		"type",
-		"profileid"
-	],
+	props: ["type", "profileid"],
 	data() {
 		return {
 			name: "",
@@ -27,7 +24,7 @@ export default {
 					email: this.email,
 				}),
 			});
-			
+
 			this.accepted = response.ok;
 			if (this.accepted) {
 				this.name = "";
@@ -36,18 +33,18 @@ export default {
 				this.email = "";
 			}
 		},
-		async getprofileinfo()
-        {
-            let response = await fetch("http://localhost:8000/getprofiles?profileid=" + this.profileid);
-            let profile = await response.json();
-            
+		async getprofileinfo() {
+			let response = await fetch(
+				"http://localhost:8000/getprofiles?profileid=" + this.profileid
+			);
+			let profile = await response.json();
+
 			this.name = profile["name"];
 			this.age = profile["age"];
 			this.date_of_birth = profile["date of birth"];
 			this.email = profile["email"];
-        },
-		async editprofile()
-		{
+		},
+		async editprofile() {
 			let response = await fetch("http://localhost:8000/editprofile", {
 				method: "PUT",
 				headers: {
@@ -77,22 +74,32 @@ export default {
 			this.email = event.target.value;
 		},
 	},
-	mounted()
-	{
-		if (this.type == "edit")
-		{
+	mounted() {
+		if (this.type == "edit") {
 			this.getprofileinfo();
 		}
-	}
+	},
 };
 </script>
 
 <template>
 	<form class="container mt-4">
-		<h2 v-if="type == 'edit'" class="text-center"><u>Edit this character profile</u></h2>
-		<h2 v-else class="text-center"><u>Enter Your New Fictional Character</u></h2>
-		<label class="form-label"><b>Name: {{ name }}</b></label>
-		
+		<h2
+			v-if="type == 'edit'"
+			class="text-center"
+		>
+			<u>Edit this character profile</u>
+		</h2>
+		<h2
+			v-else
+			class="text-center"
+		>
+			<u>Enter Your New Fictional Character</u>
+		</h2>
+		<label class="form-label"
+			><b>Name: {{ name }}</b></label
+		>
+
 		<input
 			class="form-control"
 			name="name"
@@ -100,9 +107,11 @@ export default {
 			@input="nameinputhandler"
 			:value="this.name"
 		/>
-		
-		<label class="form-label"><b>age: {{ age }}</b></label>
-		
+
+		<label class="form-label"
+			><b>age: {{ age }}</b></label
+		>
+
 		<input
 			class="form-control"
 			name="age"
@@ -111,9 +120,11 @@ export default {
 			:value="this.age"
 			min="0"
 		/>
-		
-		<label class="form-label"><b>Date of Birth: {{ date_of_birth }}</b></label>
-		
+
+		<label class="form-label"
+			><b>Date of Birth: {{ date_of_birth }}</b></label
+		>
+
 		<input
 			class="form-control"
 			name="date_of_birth"
@@ -121,9 +132,11 @@ export default {
 			@input="datebirthinputhandler"
 			:value="this.date_of_birth"
 		/>
-		
-		<label class="form-label"><b>Email: {{ email }}</b></label>
-		
+
+		<label class="form-label"
+			><b>Email: {{ email }}</b></label
+		>
+
 		<input
 			class="form-control mb-5"
 			name="email"
@@ -131,13 +144,35 @@ export default {
 			@input="emailinputhandler"
 			:value="this.email"
 		/>
-		
+
 		<div class="row">
-			<button class="col btn btn-dark" v-if="type == 'edit'" @click.prevent="editprofile">Confirm Edit</button>
-			<button class="col btn btn-dark" v-else @click.prevent="submitcharacterinfo">Submit</button>
+			<button
+				class="col btn btn-dark"
+				v-if="type == 'edit'"
+				@click.prevent="editprofile"
+			>
+				Confirm Edit
+			</button>
+			<button
+				class="col btn btn-dark"
+				v-else
+				@click.prevent="submitcharacterinfo"
+			>
+				Submit
+			</button>
 		</div>
 	</form>
 
-	<h1 v-if="this.accepted && type == 'edit'">Character Updated</h1>
-	<h1 v-else-if="this.accepted">Character Submited</h1>
+	<h1
+		v-if="this.accepted && type == 'edit'"
+		class="text-center"
+	>
+		Character Updated
+	</h1>
+	<h1
+		v-else-if="this.accepted"
+		class="text-center"
+	>
+		Character Submited
+	</h1>
 </template>

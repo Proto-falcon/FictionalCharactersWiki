@@ -1,3 +1,4 @@
 .vscode/
 __pycache__/
 CharacterProfiles/migrations/*[0-9]_*.py
+db.sqlite3
